@@ -5,6 +5,10 @@ import java.util.List;
 
 /**
  * @author holyeye
+ * 크게 3부분으로 코드를 구분할 수 있다.
+ * 1. 엔티티 매니저 설정
+ * 2. 트랜젝션 관리
+ * 3. 비즈니스 로직
  */
 public class JpaMain {
 
@@ -52,6 +56,10 @@ public class JpaMain {
         System.out.println("findMember=" + findMember.getUsername() + ", age=" + findMember.getAge());
 
         //목록 조회
+        TypedQuery<Member> query = em.createQuery("select m from Member m", Member.class);
+        List<Member> resultList = query.getResultList();
+
+        //혹은 간단하게
         List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
         System.out.println("members.size=" + members.size());
 
